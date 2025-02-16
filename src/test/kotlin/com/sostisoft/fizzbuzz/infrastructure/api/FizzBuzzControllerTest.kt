@@ -10,7 +10,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import kotlin.test.assertEquals
 
-class FizzBuzzControllerUnitTest {
+class FizzBuzzControllerTest {
 
     private val fizzBuzzUseCase: FizzBuzzUseCase = Mockito.mock(FizzBuzzUseCase::class.java)
     private val statsUseCase: StatsUseCase = Mockito.mock(StatsUseCase::class.java)
@@ -37,7 +37,7 @@ class FizzBuzzControllerUnitTest {
 
         val result = controller.getFizzBuzz(int1, int2, limit, str1, str2)
 
-        assertEquals(expectedResponse, result)
+        assertEquals(expectedResponse, result.body)
         Mockito.verify(fizzBuzzUseCase, Mockito.times(1)).execute(FizzBuzz(int1, int2, limit, str1, str2))
     }
 
@@ -49,7 +49,7 @@ class FizzBuzzControllerUnitTest {
 
         val result = controller.getStats()
 
-        assertEquals(statsResponse, result)
+        assertEquals(statsResponse, result.body)
         Mockito.verify(statsUseCase, Mockito.times(1)).getMostFrequentRequest()
     }
 }
