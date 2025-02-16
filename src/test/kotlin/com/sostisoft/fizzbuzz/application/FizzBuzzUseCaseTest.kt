@@ -1,12 +1,22 @@
 package com.sostisoft.fizzbuzz.application
 
 import com.sostisoft.fizzbuzz.domain.FizzBuzz
+import com.sostisoft.fizzbuzz.domain.ports.StatsRepository
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito.mock
 
 class FizzBuzzUseCaseTest {
 
-    private val fizzBuzzUseCase = FizzBuzzUseCase()
+    private val statsRepository = mock(StatsRepository::class.java)
+
+    private lateinit var fizzBuzzUseCase: FizzBuzzUseCase
+
+    @BeforeEach
+    fun setUp() {
+        fizzBuzzUseCase = FizzBuzzUseCase(statsRepository)
+    }
 
     @Test
     fun `should return correct FizzBuzz sequence`() {
